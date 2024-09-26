@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|c:\\users\\enric\\onedrive\\documentos\\github\\projetos\\agendamed\\agendamed\\datacontext\\agendameddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|solutionrelative:agendamed\\datacontext\\agendameddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|c:\\users\\enric\\onedrive\\documentos\\github\\projetos\\agendamed\\agendamed\\controllers\\agendamentocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|solutionrelative:agendamed\\controllers\\agendamentocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|c:\\users\\enric\\onedrive\\documentos\\github\\projetos\\agendamed\\agendamed\\migrations\\20240923195610_firstmigration.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|solutionrelative:agendamed\\migrations\\20240923195610_firstmigration.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|c:\\users\\enric\\onedrive\\documentos\\github\\projetos\\agendamed\\agendamed\\controllers\\medicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|solutionrelative:agendamed\\controllers\\medicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|c:\\users\\enric\\onedrive\\documentos\\github\\projetos\\agendamed\\agendamed\\migrations\\20240923195702_secondmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|solutionrelative:agendamed\\migrations\\20240923195702_secondmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|c:\\users\\enric\\onedrive\\documentos\\github\\projetos\\agendamed\\agendamed\\services\\agendamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{120F820E-0139-4521-BAC9-67D6C919F84A}|AgendaMed\\AgendaMed.csproj|solutionrelative:agendamed\\services\\agendamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,49 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "20240923195702_SecondMigration.cs",
-              "DocumentMoniker": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Migrations\\20240923195702_SecondMigration.cs",
-              "RelativeDocumentMoniker": "AgendaMed\\Migrations\\20240923195702_SecondMigration.cs",
-              "ToolTip": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Migrations\\20240923195702_SecondMigration.cs",
-              "RelativeToolTip": "AgendaMed\\Migrations\\20240923195702_SecondMigration.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "AgendamentoController.cs",
+              "DocumentMoniker": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Controllers\\AgendamentoController.cs",
+              "RelativeDocumentMoniker": "AgendaMed\\Controllers\\AgendamentoController.cs",
+              "ToolTip": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Controllers\\AgendamentoController.cs",
+              "RelativeToolTip": "AgendaMed\\Controllers\\AgendamentoController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-23T19:58:22.535Z",
+              "WhenOpened": "2024-09-26T20:39:33.963Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "20240923195610_FirstMigration.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Migrations\\20240923195610_FirstMigration.Designer.cs",
-              "RelativeDocumentMoniker": "AgendaMed\\Migrations\\20240923195610_FirstMigration.Designer.cs",
-              "ToolTip": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Migrations\\20240923195610_FirstMigration.Designer.cs",
-              "RelativeToolTip": "AgendaMed\\Migrations\\20240923195610_FirstMigration.Designer.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Title": "MedicoController.cs",
+              "DocumentMoniker": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Controllers\\MedicoController.cs",
+              "RelativeDocumentMoniker": "AgendaMed\\Controllers\\MedicoController.cs",
+              "ToolTip": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Controllers\\MedicoController.cs",
+              "RelativeToolTip": "AgendaMed\\Controllers\\MedicoController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-23T19:57:26.767Z",
+              "WhenOpened": "2024-09-26T20:39:26.952Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AgendaMedDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\DataContext\\AgendaMedDbContext.cs",
-              "RelativeDocumentMoniker": "AgendaMed\\DataContext\\AgendaMedDbContext.cs",
-              "ToolTip": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\DataContext\\AgendaMedDbContext.cs",
-              "RelativeToolTip": "AgendaMed\\DataContext\\AgendaMedDbContext.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAwwBYAAAAFAAAA",
+              "DocumentIndex": 2,
+              "Title": "AgendamentoService.cs",
+              "DocumentMoniker": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Services\\AgendamentoService.cs",
+              "RelativeDocumentMoniker": "AgendaMed\\Services\\AgendamentoService.cs",
+              "ToolTip": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\Services\\AgendamentoService.cs",
+              "RelativeToolTip": "AgendaMed\\Services\\AgendamentoService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-23T19:45:02.631Z",
+              "WhenOpened": "2024-09-26T20:30:11.49Z",
               "EditorCaption": ""
             }
           ]
