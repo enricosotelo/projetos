@@ -27,15 +27,18 @@ namespace AgendaMed.Migrations
             modelBuilder.Entity("AgendaMed.Models.Agendamento", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("MedicoId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("PacienteId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
@@ -50,6 +53,7 @@ namespace AgendaMed.Migrations
             modelBuilder.Entity("AgendaMed.Models.Medico", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Especialidade")
@@ -82,6 +86,10 @@ namespace AgendaMed.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("Pacientes");
@@ -90,16 +98,30 @@ namespace AgendaMed.Migrations
             modelBuilder.Entity("AgendaMed.Models.Agendamento", b =>
                 {
                     b.HasOne("AgendaMed.Models.Medico", "Medico")
-                        .WithMany()
-                        .HasForeignKey("MedicoId");
+                        .WithMany("Agendamentos")
+                        .HasForeignKey("MedicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AgendaMed.Models.Paciente", "Paciente")
-                        .WithMany()
-                        .HasForeignKey("PacienteId");
+                        .WithMany("Agendamentos")
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Medico");
 
                     b.Navigation("Paciente");
+                });
+
+            modelBuilder.Entity("AgendaMed.Models.Medico", b =>
+                {
+                    b.Navigation("Agendamentos");
+                });
+
+            modelBuilder.Entity("AgendaMed.Models.Paciente", b =>
+                {
+                    b.Navigation("Agendamentos");
                 });
 #pragma warning restore 612, 618
         }

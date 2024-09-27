@@ -3,31 +3,57 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AgendaMed.Models;
 using AgendaMed.DataContext;
-using AgendaMed.Models;
 
-public class MedicoRepository : IMedicoRepository
+namespace AgendaMed.Repositories
 {
-    private readonly DbContext _context;
-
-    public MedicoRepository(DbContext context)
+    public class MedicoRepository : IMedicoRepository
     {
-        _context = context;
-    }
+        private readonly AgendaMedDbContext _context;
 
-    public async Task<Medico> GetAsync(string id)
-    {
-        return await _context.Medicos.FindAsync(id);
-    }
+        public MedicoRepository(AgendaMedDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task<IEnumerable<Medico>> GetByEspecialidadeAsync(string especialidade)
-    {
-        return await _context.Medicos.Where(m => m.Especialidade == especialidade).ToListAsync();
-    }
+        public async Task<Medico> GetAsync(string id)
+        {
+            return await _context.Medicos.FindAsync(id);
+        }
 
-    public async Task<bool> VerifyAvailabilityAsync(string id, DateTime data)
-    {
-        // TO DO: implement logic to verify medico availability
-        // for now, return true
-        return true;
+        public async Task<IEnumerable<Medico>> GetByEspecialidadeAsync(string especialidade)
+        {
+            return await _context.Medicos.Where(m => m.Especialidade == especialidade).ToListAsync();
+        }
+
+        public async Task<bool> VerifyAvailabilityAsync(string id, DateTime data)
+        {
+            var agendamentos = await _context.Agendamentos
+                                     .Where(a => a.MedicoId == id && a.Date == data)
+                                     .ToListAsync();
+            return !agendamentos.Any();
+        }
+
+        public async Task<IEnumerable<Medico>> GetAsync()
+        {
+            return await _context.Medicos.ToListAsync();
+        }
+
+        public async Task CreateAsync(Medico medico)
+        {
+            _context.Medicos.Add(medico);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Medico medico)
+        {
+            _context.Medicos.Update(medico);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Medico medico)
+        {
+            _context.Medicos.Remove(medico);
+            await _context.SaveChangesAsync();
+        }
     }
 }

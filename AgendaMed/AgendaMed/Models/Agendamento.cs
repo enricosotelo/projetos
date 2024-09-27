@@ -17,7 +17,7 @@ namespace AgendaMed.Models
 
         public DateTime Date { get; set; }
 
-        private Agendamento() { }
+        public Agendamento() { }
 
         public Agendamento(string pacienteId, string medicoId, DateTime date)
         {

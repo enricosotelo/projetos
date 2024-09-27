@@ -5,22 +5,28 @@ namespace AgendaMed.Models
 {
     public class Paciente
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public string Name { get; set; }
+
         public string Email { get; set; }
+
+        public string Telefone { get; set; }
+
         public bool Ativo { get; set; }
 
-        public ICollection<Agendamento> Agendamentos { get; set; }
+        public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
 
-        private Paciente() { }
+        public Paciente() { }
 
-        public Paciente(string Name, string Email, bool Ativo)
+        public Paciente(string Name, string Email, string Telefone, bool Ativo)
         {
             this.Name = Name;
             this.Email = Email;
             this.Ativo = Ativo;
+            this.Telefone = Telefone;
             this.Agendamentos = new HashSet<Agendamento>();
         }
     }

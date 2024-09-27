@@ -1,7 +1,7 @@
-﻿using AgendaMed.Models;
+﻿using AgendaMed.DTO;
+using AgendaMed.Models;
 using AgendaMed.Services;
 using Microsoft.AspNetCore.Mvc;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace AgendaMed.Controllers
 {
@@ -9,9 +9,9 @@ namespace AgendaMed.Controllers
     [Route("api/[controller]")]
     public class MedicoController : ControllerBase
     {
-        private readonly MedicoService _medicoService;
+        private readonly IMedicoService _medicoService;
 
-        public MedicoController(MedicoService medicoService)
+        public MedicoController(IMedicoService medicoService)
         {
             _medicoService = medicoService;
         }
@@ -19,7 +19,9 @@ namespace AgendaMed.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Medico>>> GetMedicos()
         {
-            return await _medicoService.GetMedicosAsync();
+            var medicos = await _medicoService.GetMedicosAsync();
+            return Ok(medicos);
+
         }
 
         [HttpGet("{id}")]
@@ -29,9 +31,15 @@ namespace AgendaMed.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Medico>> CreateMedico(Medico medico)
+        public async Task<IActionResult> CreateMedico([FromBody] MedicoDTO medicoDTO)
         {
-            return await _medicoService.CreateMedicoAsync(medico);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var medico = await _medicoService.CreateMedicoAsync(medicoDTO);
+            return CreatedAtAction(nameof(GetMedicoById), new { id = medico.Id }, medico);
         }
 
         [HttpPut("{id}")]

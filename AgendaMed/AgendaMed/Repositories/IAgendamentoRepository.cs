@@ -1,8 +1,15 @@
 ﻿using System.Threading.Tasks;
 using AgendaMed.Models;
-using AgendaMed.Models;
+using System.Collections.Generic;
 
-public interface IAgendamentoRepository
+namespace AgendaMed.Repositories
 {
-    Task<Agendamento> CreateAsync(Agendamento agendamento);
+    public interface IAgendamentoRepository
+    {
+        Task<IEnumerable<Agendamento>> GetAsync();
+        Task<Agendamento> GetAsync(string id);
+        Task<Agendamento> CreateAsync(Agendamento agendamento);
+        Task<Agendamento> UpdateAsync(Agendamento agendamento);
+        Task DeleteAsync(string id);
+    }
 }

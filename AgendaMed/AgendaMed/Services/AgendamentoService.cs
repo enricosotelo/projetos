@@ -1,71 +1,117 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using AgendaMed.DTO;
 using AgendaMed.Models;
 using AgendaMed.Repositories;
-using Microsoft.EntityFrameworkCore;
-using AgendaMed.Models;
 
-
-public class AgendamentoService
+namespace AgendaMed.Services
 {
-    private readonly IAgendamentoRepository _agendamentoRepository;
-    private readonly PacienteService _pacienteService;
-    private readonly MedicoService _medicoService;
-
-    public AgendamentoService(
-        IAgendamentoRepository agendamentoRepository,
-        PacienteService pacienteService,
-        MedicoService medicoService)
+    public class AgendamentoService : IAgendamentoService // Make sure AgendamentoService implements IAgendamentoService
     {
-        _agendamentoRepository = agendamentoRepository;
-        _pacienteService = pacienteService;
-        _medicoService = medicoService;
-    }
+        private readonly IAgendamentoRepository _agendamentoRepository;
+        private readonly IPacienteService _pacienteService; // Use the interface instead of the concrete implementation
+        private readonly IMedicoService _medicoService;
 
-    public async Task<Agendamento> CreateAgendamentoAsync(string idMedico, string idPaciente, DateTime data)
-    {
-        var paciente = await _pacienteService.GetPacienteByIdAsync(idPaciente);
-        if (paciente == null || !paciente.Ativo)
+        public AgendamentoService(
+            IAgendamentoRepository agendamentoRepository,
+            IPacienteService pacienteService, // Use interface here
+            IMedicoService medicoService)
         {
-            throw new Exception("Paciente não encontrado ou não ativo");
+            _agendamentoRepository = agendamentoRepository;
+            _pacienteService = pacienteService;
+            _medicoService = medicoService;
+        }
+        public async Task<Agendamento> CreateAgendamentoAsync(AgendamentoDTO agendamentoDTO)
+        {
+            var agendamento = new Agendamento
+            {
+                PacienteId = agendamentoDTO.PacienteId,
+                MedicoId = agendamentoDTO.MedicoId,
+                Date = agendamentoDTO.Date
+            };
+
+            await _agendamentoRepository.CreateAsync(agendamento);
+            return agendamento;
+        }
+        public async Task<IEnumerable<Agendamento>> GetAgendamentosAsync()
+        {
+            return await _agendamentoRepository.GetAsync();
         }
 
-        var medico = await _medicoService.GetMedicoByIdAsync(idMedico);
-        if (medico == null)
+        public async Task<Agendamento> GetAgendamentoByIdAsync(string id)
         {
-            throw new Exception("Médico não encontrado");
+            return await _agendamentoRepository.GetAsync(id);
         }
 
-        if (!await _medicoService.VerifyMedicoAvailabilityAsync(idMedico, data))
+        public async Task<Agendamento> CreateAgendamentoAsync(string idMedico, string idPaciente, DateTime data)
         {
-            throw new Exception("Médico não disponível na data especificada");
+            var paciente = await _pacienteService.GetPacienteByIdAsync(idPaciente);
+            if (paciente == null || !paciente.Ativo)
+            {
+                throw new Exception("Paciente não encontrado ou não ativo");
+            }
+
+            var medico = await _medicoService.GetMedicoByIdAsync(idMedico);
+            if (medico == null)
+            {
+                throw new Exception("Médico não encontrado");
+            }
+
+            if (!await _medicoService.VerifyMedicoAvailabilityAsync(idMedico, data))
+            {
+                throw new Exception("Médico não disponível na data especificada");
+            }
+
+            var agendamento = new Agendamento(idPaciente, idMedico, data);
+            return await _agendamentoRepository.CreateAsync(agendamento);
         }
 
-        var agendamento = new Agendamento(idPaciente, idMedico, data);
-        return await _agendamentoRepository.CreateAsync(agendamento);
-    }
-
-    public async Task<Agendamento> CreateAgendamentoWithRandomMedicoAsync(string especialidade, string idPaciente, DateTime data)
-    {
-        var paciente = await _pacienteService.GetPacienteByIdAsync(idPaciente);
-        if (paciente == null || !paciente.Ativo)
+        public async Task<Agendamento> CreateAgendamentoWithRandomMedicoAsync(string especialidade, string idPaciente, DateTime data)
         {
-            throw new Exception("Paciente não encontrado ou não ativo");
+            var paciente = await _pacienteService.GetPacienteByIdAsync(idPaciente);
+            if (paciente == null || !paciente.Ativo)
+            {
+                throw new Exception("Paciente não encontrado ou não ativo");
+            }
+
+            var medicos = await _medicoService.GetMedicosByEspecialidadeAsync(especialidade);
+            if (!medicos.Any())
+            {
+                throw new Exception("Nenhum médico encontrado com a especialidade especificada");
+            }
+
+            var randomMedico = medicos.ElementAt(new Random().Next(medicos.Count()));
+            if (!await _medicoService.VerifyMedicoAvailabilityAsync(randomMedico.Id, data))
+            {
+                throw new Exception("Médico não disponível na data especificada");
+            }
+
+            var agendamento = new Agendamento(idPaciente, randomMedico.Id, data);
+            return await _agendamentoRepository.CreateAsync(agendamento);
         }
 
-        var medicos = await _medicoService.GetMedicosByEspecialidadeAsync(especialidade);
-        if (!medicos.Any())
+
+
+        public async Task<Agendamento> UpdateAgendamentoAsync(string id, Agendamento agendamento)
         {
-            throw new Exception("Nenhum médico encontrado com a especialidade especificada");
+            var existingAgendamento = await _agendamentoRepository.GetAsync(id);
+            if (existingAgendamento == null)
+            {
+                throw new Exception("Agendamento not found");
+            }
+
+            existingAgendamento.PacienteId = agendamento.PacienteId;
+            existingAgendamento.MedicoId = agendamento.MedicoId;
+            existingAgendamento.Date = agendamento.Date;
+
+            return await _agendamentoRepository.UpdateAsync(existingAgendamento);
         }
 
-        var randomMedico = medicos.ElementAt(new Random().Next(medicos.Count()));
-        if (!await _medicoService.VerifyMedicoAvailabilityAsync(randomMedico.Id, data))
+        public async Task DeleteAgendamentoAsync(string id)
         {
-            throw new Exception("Médico não disponível na data especificada");
+            await _agendamentoRepository.DeleteAsync(id);
         }
-
-        var agendamento = new Agendamento(idPaciente, randomMedico.Id, data);
-        return await _agendamentoRepository.CreateAsync(agendamento);
     }
 }

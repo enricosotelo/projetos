@@ -1,4 +1,5 @@
-﻿using AgendaMed.Models;
+﻿using AgendaMed.DTO;
+using AgendaMed.Models;
 using AgendaMed.Services;
 using Microsoft.AspNetCore.Mvc;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
@@ -9,7 +10,7 @@ namespace AgendaMed.Controllers
     [Route("api/[controller]")]
     public class AgendamentoController : ControllerBase
     {
-        private readonly AgendamentoService _agendamentoService;
+        private readonly IAgendamentoService _agendamentoService;
 
         public AgendamentoController(AgendamentoService agendamentoService)
         {
@@ -19,7 +20,8 @@ namespace AgendaMed.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Agendamento>>> GetAgendamentos()
         {
-            return await _agendamentoService.GetAgendamentosAsync();
+            var agendamentos = await _agendamentoService.GetAgendamentosAsync();
+            return Ok(agendamentos);
         }
 
         [HttpGet("{id}")]
@@ -29,9 +31,15 @@ namespace AgendaMed.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Agendamento>> CreateAgendamento(Agendamento agendamento)
+        public async Task<IActionResult> CreateAgendamento([FromBody] AgendamentoDTO agendamentoDTO)
         {
-            return await _agendamentoService.CreateAgendamentoAsync(agendamento);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var agendamento = await _agendamentoService.CreateAgendamentoAsync(agendamentoDTO);
+            return CreatedAtAction(nameof(GetAgendamentoById), new { id = agendamento.Id }, agendamento);
         }
 
         [HttpPut("{id}")]

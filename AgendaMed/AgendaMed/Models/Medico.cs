@@ -13,7 +13,7 @@ namespace AgendaMed.Models
 
         public ICollection<Agendamento> Agendamentos { get; set; }
 
-        private Medico() { }
+        public Medico() { }
 
         public Medico(string Name, string Especialidade)
         {
