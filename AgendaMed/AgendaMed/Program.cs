@@ -30,10 +30,18 @@ builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 
+builder.Services.AddScoped<IAgendamentoService, AgendamentoService>();
+builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+
+
+builder.Services.AddScoped<IMedicoService, MedicoService>();
+builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
+
+
 // Configuração do DbContext com MySQL
 builder.Services.AddDbContext<AgendaMedDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("AgendaMedDb"),
-                      ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("AgendaMedDb"))));
+                      ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("agendamedDb"))));
 
 var app = builder.Build();
 

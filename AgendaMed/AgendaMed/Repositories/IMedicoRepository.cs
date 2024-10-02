@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AgendaMed.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace AgendaMed.Repositories
 {
@@ -13,5 +15,13 @@ namespace AgendaMed.Repositories
         Task CreateAsync(Medico medico);
         Task UpdateAsync(Medico medico);
         Task DeleteAsync(Medico medico);
+
+        public async Task<IEnumerable<Medico>> GetMedicosDisponiveisPorEspecialidadeAsync(string especialidade)
+        {
+            return await _context.Medicos
+                .Where(m => m.Especialidade == especialidade && m.Disponivel)
+                .ToListAsync();
+        }
+
     }
 }

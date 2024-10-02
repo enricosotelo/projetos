@@ -19,7 +19,7 @@ public partial class AgendaMedDbContext : DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("server=LocalHost;user id=root;database=AgendaMedDB", ServerVersion.Parse("10.4.32-mariadb"));
+        => optionsBuilder.UseMySql("server=LocalHost;port=3308;user id=root;database=AgendaMedDB", ServerVersion.Parse("10.4.32-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

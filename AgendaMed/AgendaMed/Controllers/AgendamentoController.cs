@@ -12,7 +12,9 @@ namespace AgendaMed.Controllers
     {
         private readonly IAgendamentoService _agendamentoService;
 
-        public AgendamentoController(AgendamentoService agendamentoService)
+
+
+        public AgendamentoController(IAgendamentoService agendamentoService)
         {
             _agendamentoService = agendamentoService;
         }
@@ -39,6 +41,31 @@ namespace AgendaMed.Controllers
             }
 
             var agendamento = await _agendamentoService.CreateAgendamentoAsync(agendamentoDTO);
+            return CreatedAtAction(nameof(GetAgendamentoById), new { id = agendamento.Id }, agendamento);
+        }
+
+        [HttpPost("/especialidades/{nomeEspecialidade}/agendamento")]
+        public async Task<IActionResult> CreateAgendamentoByEspecialidade(
+    [FromRoute] string nomeEspecialidade,
+    [FromBody] AgendamentoDTO agendamentoDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Chama o serviço para criar o agendamento com médico aleatório
+            var agendamento = await _agendamentoService.CreateAgendamentoPorEspecialidadeAsync(
+                nomeEspecialidade,
+                agendamentoDTO.PacienteId, // Passa apenas o paciente e a data
+                agendamentoDTO.Date
+            );
+
+            if (agendamento == null)
+            {
+                return NotFound(new { message = "Nenhum médico disponível para esta especialidade." });
+            }
+
             return CreatedAtAction(nameof(GetAgendamentoById), new { id = agendamento.Id }, agendamento);
         }
 

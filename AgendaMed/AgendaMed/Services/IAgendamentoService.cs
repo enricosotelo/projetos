@@ -12,5 +12,7 @@ namespace AgendaMed.Services
         Task<Agendamento> CreateAgendamentoAsync(AgendamentoDTO agendamentoDTO);
         Task<Agendamento> UpdateAgendamentoAsync(string id, Agendamento agendamento);
         Task DeleteAgendamentoAsync(string id);
+
+        Task<IEnumerable<Medico>> GetMedicosDisponiveisPorEspecialidadeAsync(string especialidade);
     }
 }
