@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaMed.Migrations
 {
     [DbContext(typeof(AgendaMedDbContext))]
-    [Migration("20241002013626_migrations-test094")]
-    partial class migrationstest094
+    [Migration("20241002224250_novamigracao3")]
+    partial class novamigracao3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

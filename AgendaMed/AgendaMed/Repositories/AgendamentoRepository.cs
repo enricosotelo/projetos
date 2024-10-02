@@ -35,22 +35,5 @@ namespace AgendaMed.Repositories
             await _context.SaveChangesAsync();
             return agendamento;
         }
-
-        public async Task<Agendamento> UpdateAsync(Agendamento agendamento)
-        {
-            _context.Agendamentos.Update(agendamento);
-            await _context.SaveChangesAsync();
-            return agendamento;
-        }
-
-        public async Task DeleteAsync(string id)
-        {
-            var agendamento = await GetAsync(id);
-            if (agendamento != null)
-            {
-                _context.Agendamentos.Remove(agendamento);
-                await _context.SaveChangesAsync();
-            }
-        }
     }
 }

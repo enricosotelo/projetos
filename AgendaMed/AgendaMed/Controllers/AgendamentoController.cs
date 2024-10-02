@@ -56,33 +56,19 @@ namespace AgendaMed.Controllers
                 return BadRequest(ModelState);
             }
 
+
             var agendamento = await _agendamentoService.CreateAgendamentoAsync(agendamentoDTO);
+
+            Console.WriteLine("Email enviado com sucesso!");
+            Console.WriteLine($"Nome do Paciente: {agendamento.Paciente.Name}");
+            Console.WriteLine($"Nome do Médico: {agendamento.Medico.Name}");
+            Console.WriteLine($"Data da Consulta: {agendamento.Date}");
+            Console.WriteLine($"Especialidade do Médico: {agendamento.Medico.Especialidade}");
+
             return CreatedAtAction(nameof(GetAgendamentoById), new { id = agendamento.Id }, agendamento);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Agendamento>> UpdateAgendamento(string id, [FromBody] Agendamento agendamento)
-        {
-            var updatedAgendamento = await _agendamentoService.UpdateAgendamentoAsync(id, agendamento);
-            if (updatedAgendamento == null)
-            {
-                return NotFound();
-            }
-            return Ok(updatedAgendamento);
-        }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAgendamento(string id)
-        {
-            var agendamento = await _agendamentoService.GetAgendamentoByIdAsync(id);
-            if (agendamento == null)
-            {
-                return NotFound();
-            }
-
-            await _agendamentoService.DeleteAgendamentoAsync(id);
-            return NoContent();
-        }
 
         [HttpPost("especialidades/{nomeEspecialidade}")]
         public async Task<IActionResult> AgendarPorEspecialidade(string nomeEspecialidade, [FromBody] AgendamentoEspecialidadeDTO request)
@@ -90,6 +76,13 @@ namespace AgendaMed.Controllers
             try
             {
                 var agendamento = await _agendamentoService.AgendarMedicoAleatoriamente(nomeEspecialidade, request);
+
+                Console.WriteLine("Email enviado com sucesso!");
+                Console.WriteLine($"Nome do Paciente: {agendamento.Paciente.Name}");
+                Console.WriteLine($"Nome do Médico: {agendamento.Medico.Name}");
+                Console.WriteLine($"Data da Consulta: {agendamento.Date}");
+                Console.WriteLine($"Especialidade do Médico: {agendamento.Medico.Especialidade}");
+
                 return Ok(agendamento);
             }
             catch (Exception ex)

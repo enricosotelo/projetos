@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj": {}
+    "C:\\Users\\Aula\\Documents\\GitHub\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj": {}
   },
   "projects": {
-    "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj": {
+    "C:\\Users\\Aula\\Documents\\GitHub\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
+        "projectUniqueName": "C:\\Users\\Aula\\Documents\\GitHub\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
         "projectName": "AgendaMed",
-        "projectPath": "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
-        "packagesPath": "C:\\Users\\enric\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\obj\\",
+        "projectPath": "C:\\Users\\Aula\\Documents\\GitHub\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
+        "packagesPath": "C:\\Users\\Aula\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Aula\\Documents\\GitHub\\projetos\\AgendaMed\\AgendaMed\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\enric\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Aula\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -12,7 +12,5 @@ namespace AgendaMed.Repositories.Interfaces
         Task DeactivateAsync(string id);
         Task<IEnumerable<Paciente>> GetAsync();
         Task CreateAsync(Paciente paciente);
-        Task UpdateAsync(Paciente paciente);
-        Task DeleteAsync(Paciente paciente);
     }
 }

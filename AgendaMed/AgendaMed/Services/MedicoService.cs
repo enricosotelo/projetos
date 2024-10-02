@@ -51,30 +51,6 @@ namespace AgendaMed.Services
         }
 
 
-        public async Task<Medico> UpdateMedicoAsync(string id, Medico medico)
-        {
-            var existingMedico = await _medicoRepository.GetAsync(id);
-            if (existingMedico == null)
-            {
-                throw new Exception("Médico não encontrado");
-            }
 
-            existingMedico.Name = medico.Name;
-            existingMedico.Especialidade = medico.Especialidade;
-
-            await _medicoRepository.UpdateAsync(existingMedico);
-            return existingMedico;
-        }
-
-        public async Task DeleteMedicoAsync(string id)
-        {
-            var existingMedico = await _medicoRepository.GetAsync(id);
-            if (existingMedico == null)
-            {
-                throw new Exception("Médico não encontrado");
-            }
-
-            await _medicoRepository.DeleteAsync(existingMedico);
-        }
     }
 }

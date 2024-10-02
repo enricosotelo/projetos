@@ -10,7 +10,5 @@ namespace AgendaMed.Services.Interfaces
         Task<bool> VerifyMedicoAvailabilityAsync(string id, DateTime data);
         Task<IEnumerable<Medico>> GetMedicosAsync();
         Task<Medico> CreateMedicoAsync(MedicoDTO medicoDTO);
-        Task<Medico> UpdateMedicoAsync(string id, Medico medico);
-        Task DeleteMedicoAsync(string id);
     }
 }

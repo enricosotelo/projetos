@@ -9,10 +9,10 @@ using AgendaMed.Services.Interfaces;
 
 namespace AgendaMed.Services
 {
-    public class AgendamentoService : IAgendamentoService 
+    public class AgendamentoService : IAgendamentoService
     {
         private readonly IAgendamentoRepository _agendamentoRepository;
-        private readonly IPacienteService _pacienteService; 
+        private readonly IPacienteService _pacienteService;
         private readonly IMedicoService _medicoService;
 
         public AgendamentoService(
@@ -72,25 +72,6 @@ namespace AgendaMed.Services
 
 
 
-        public async Task<Agendamento> UpdateAgendamentoAsync(string id, Agendamento agendamento)
-        {
-            var existingAgendamento = await _agendamentoRepository.GetAsync(id);
-            if (existingAgendamento == null)
-            {
-                throw new Exception("Agendamento not found");
-            }
-
-            existingAgendamento.PacienteId = agendamento.PacienteId;
-            existingAgendamento.MedicoId = agendamento.MedicoId;
-            existingAgendamento.Date = agendamento.Date;
-
-            return await _agendamentoRepository.UpdateAsync(existingAgendamento);
-        }
-
-        public async Task DeleteAgendamentoAsync(string id)
-        {
-            await _agendamentoRepository.DeleteAsync(id);
-        }
 
         public async Task<Agendamento> AgendarMedicoAleatoriamente(string especialidade, AgendamentoEspecialidadeDTO request)
         {
@@ -128,7 +109,7 @@ namespace AgendaMed.Services
 
             await _agendamentoRepository.CreateAsync(agendamento);
 
-      
+
 
             return agendamento;
         }

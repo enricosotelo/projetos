@@ -44,17 +44,5 @@ namespace AgendaMed.Repositories
             _context.Medicos.Add(medico);
             await _context.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(Medico medico)
-        {
-            _context.Medicos.Update(medico);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(Medico medico)
-        {
-            _context.Medicos.Remove(medico);
-            await _context.SaveChangesAsync();
-        }
     }
 }

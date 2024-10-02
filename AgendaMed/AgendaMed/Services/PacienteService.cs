@@ -61,31 +61,6 @@ namespace AgendaMed.Services
             return await _pacienteRepository.GetAsync();
         }
 
-        public async Task<Paciente> UpdatePacienteAsync(string id, Paciente paciente)
-        {
-            var existingPaciente = await _pacienteRepository.GetAsync(id);
-            if (existingPaciente == null)
-            {
-                throw new Exception("Paciente não encontrado");
-            }
 
-            existingPaciente.Name = paciente.Name;
-            existingPaciente.Email = paciente.Email;
-            existingPaciente.Telefone = paciente.Telefone;
-
-            await _pacienteRepository.UpdateAsync(existingPaciente);
-            return existingPaciente;
-        }
-
-        public async Task DeletePacienteAsync(string id)
-        {
-            var existingPaciente = await _pacienteRepository.GetAsync(id);
-            if (existingPaciente == null)
-            {
-                throw new Exception("Paciente não encontrado");
-            }
-
-            await _pacienteRepository.DeleteAsync(existingPaciente);
-        }
     }
 }

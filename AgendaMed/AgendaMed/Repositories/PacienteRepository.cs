@@ -56,17 +56,5 @@ namespace AgendaMed.Repositories
             _context.Pacientes.Add(paciente);
             await _context.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(Paciente paciente)
-        {
-            _context.Pacientes.Update(paciente);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(Paciente paciente)
-        {
-            _context.Pacientes.Remove(paciente);
-            await _context.SaveChangesAsync();
-        }
     }
 }

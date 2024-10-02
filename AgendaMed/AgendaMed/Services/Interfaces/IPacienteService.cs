@@ -11,7 +11,5 @@ namespace AgendaMed.Services
         Task DeactivatePacienteAsync(string id);
         Task<IEnumerable<Paciente>> GetPacientesAsync();
         Task<Paciente> CreatePacienteAsync(PacienteDTO pacienteDTO);
-        Task<Paciente> UpdatePacienteAsync(string id, Paciente paciente);
-        Task DeletePacienteAsync(string id);
     }
 }

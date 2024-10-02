@@ -42,17 +42,5 @@ namespace AgendaMed.Controllers
             return CreatedAtAction(nameof(GetMedicoById), new { id = medico.Id }, medico);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Medico>> UpdateMedico(string id, Medico medico)
-        {
-            return await _medicoService.UpdateMedicoAsync(id, medico);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteMedico(string id)
-        {
-            await _medicoService.DeleteMedicoAsync(id);
-            return NoContent();
-        }
     }
 }

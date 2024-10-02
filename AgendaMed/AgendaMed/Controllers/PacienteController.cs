@@ -41,18 +41,5 @@ namespace AgendaMed.Controllers
             var paciente = await _pacienteService.CreatePacienteAsync(pacienteDTO);
             return CreatedAtAction(nameof(GetPacienteById), new { id = paciente.Id }, paciente);
         }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Paciente>> UpdatePaciente(string id, Paciente paciente)
-        {
-            return await _pacienteService.UpdatePacienteAsync(id, paciente);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeletePaciente(string id)
-        {
-            await _pacienteService.DeletePacienteAsync(id);
-            return NoContent();
-        }
     }
 }

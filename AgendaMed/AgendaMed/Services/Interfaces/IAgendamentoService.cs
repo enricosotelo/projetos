@@ -9,8 +9,6 @@ namespace AgendaMed.Services.Interfaces
         Task<Agendamento> GetAgendamentoByIdAsync(string id);
         Task<Agendamento> CreateAgendamentoAsync(string idMedico, string idPaciente, DateTime data);
         Task<Agendamento> CreateAgendamentoAsync(AgendamentoDTO agendamentoDTO);
-        Task<Agendamento> UpdateAgendamentoAsync(string id, Agendamento agendamento);
-        Task DeleteAgendamentoAsync(string id);
 
         Task<Agendamento> AgendarMedicoAleatoriamente(string especialidade, AgendamentoEspecialidadeDTO request);
 

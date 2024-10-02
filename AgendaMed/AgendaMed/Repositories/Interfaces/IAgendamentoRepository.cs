@@ -9,7 +9,5 @@ namespace AgendaMed.Repositories.Interfaces
         Task<IEnumerable<Agendamento>> GetAsync();
         Task<Agendamento> GetAsync(string id);
         Task<Agendamento> CreateAsync(Agendamento agendamento);
-        Task<Agendamento> UpdateAsync(Agendamento agendamento);
-        Task DeleteAsync(string id);
     }
 }
