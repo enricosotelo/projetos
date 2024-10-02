@@ -1,6 +1,6 @@
 ﻿using AgendaMed.DTO;
 using AgendaMed.Models;
-using AgendaMed.Services;
+using AgendaMed.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaMed.Controllers

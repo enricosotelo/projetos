@@ -1,5 +1,7 @@
 using AgendaMed.DataContext;
+using AgendaMed.Repositories.Interfaces;
 using AgendaMed.Repositories;
+using AgendaMed.Services.Interfaces;
 using AgendaMed.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -18,30 +20,23 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Injeção de dependência para o serviço de Paciente
+// Injeção de dependência para os serviços e repositórios
 builder.Services.AddScoped<IPacienteService, PacienteService>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 
-// Injeção de dependência para o serviço de Agendamento
 builder.Services.AddScoped<IAgendamentoService, AgendamentoService>();
 builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
-
-// Injeção de dependência para o serviço de Médico
-builder.Services.AddScoped<IMedicoService, MedicoService>();
-builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
-
-builder.Services.AddScoped<IAgendamentoService, AgendamentoService>();
-builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
-
 
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 
 
-// Configuração do DbContext com MySQL
 builder.Services.AddDbContext<AgendaMedDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("AgendaMedDb"),
-                      ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("agendamedDb"))));
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("AgendaMedDb"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("AgendaMedDb"))
+    )
+);
 
 var app = builder.Build();
 

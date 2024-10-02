@@ -1,18 +1,17 @@
 ﻿using AgendaMed.DTO;
 using AgendaMed.Models;
-using AgendaMed.Services;
+using AgendaMed.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AgendaMed.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/agendamentos")]
     public class AgendamentoController : ControllerBase
     {
         private readonly IAgendamentoService _agendamentoService;
-
-
 
         public AgendamentoController(IAgendamentoService agendamentoService)
         {
@@ -20,16 +19,33 @@ namespace AgendaMed.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Agendamento>>> GetAgendamentos()
+        public async Task<IActionResult> GetAgendamentos()
         {
             var agendamentos = await _agendamentoService.GetAgendamentosAsync();
-            return Ok(agendamentos);
+            var result = agendamentos.Select(a => new
+            {
+                a.Id,
+                a.PacienteId,
+                PacienteNome = a.Paciente.Name,
+                a.MedicoId,
+                MedicoNome = a.Medico.Name,
+                MedicoEspecialidade = a.Medico.Especialidade,
+                a.Date
+            });
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Agendamento>> GetAgendamentoById(string id)
+        public async Task<IActionResult> GetAgendamentoById(string id)
         {
-            return await _agendamentoService.GetAgendamentoByIdAsync(id);
+            var agendamento = await _agendamentoService.GetAgendamentoByIdAsync(id);
+
+            if (agendamento == null)
+            {
+                return NotFound();
+
+            }
+            return Ok(agendamento);
         }
 
         [HttpPost]
@@ -44,42 +60,42 @@ namespace AgendaMed.Controllers
             return CreatedAtAction(nameof(GetAgendamentoById), new { id = agendamento.Id }, agendamento);
         }
 
-        [HttpPost("/especialidades/{nomeEspecialidade}/agendamento")]
-        public async Task<IActionResult> CreateAgendamentoByEspecialidade(
-    [FromRoute] string nomeEspecialidade,
-    [FromBody] AgendamentoDTO agendamentoDTO)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Chama o serviço para criar o agendamento com médico aleatório
-            var agendamento = await _agendamentoService.CreateAgendamentoPorEspecialidadeAsync(
-                nomeEspecialidade,
-                agendamentoDTO.PacienteId, // Passa apenas o paciente e a data
-                agendamentoDTO.Date
-            );
-
-            if (agendamento == null)
-            {
-                return NotFound(new { message = "Nenhum médico disponível para esta especialidade." });
-            }
-
-            return CreatedAtAction(nameof(GetAgendamentoById), new { id = agendamento.Id }, agendamento);
-        }
-
         [HttpPut("{id}")]
-        public async Task<ActionResult<Agendamento>> UpdateAgendamento(string id, Agendamento agendamento)
+        public async Task<ActionResult<Agendamento>> UpdateAgendamento(string id, [FromBody] Agendamento agendamento)
         {
-            return await _agendamentoService.UpdateAgendamentoAsync(id, agendamento);
+            var updatedAgendamento = await _agendamentoService.UpdateAgendamentoAsync(id, agendamento);
+            if (updatedAgendamento == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedAgendamento);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAgendamento(string id)
         {
+            var agendamento = await _agendamentoService.GetAgendamentoByIdAsync(id);
+            if (agendamento == null)
+            {
+                return NotFound();
+            }
+
             await _agendamentoService.DeleteAgendamentoAsync(id);
             return NoContent();
+        }
+
+        [HttpPost("especialidades/{nomeEspecialidade}")]
+        public async Task<IActionResult> AgendarPorEspecialidade(string nomeEspecialidade, [FromBody] AgendamentoEspecialidadeDTO request)
+        {
+            try
+            {
+                var agendamento = await _agendamentoService.AgendarMedicoAleatoriamente(nomeEspecialidade, request);
+                return Ok(agendamento);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

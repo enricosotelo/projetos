@@ -9,17 +9,11 @@ public partial class AgendaMedDbContext : DbContext
     public DbSet<Medico> Medicos { get; set; }
     public DbSet<Agendamento> Agendamentos { get; set; }
 
-    public AgendaMedDbContext()
-    {
-    }
-
     public AgendaMedDbContext(DbContextOptions<AgendaMedDbContext> options)
         : base(options)
     {
-    }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("server=LocalHost;port=3308;user id=root;database=AgendaMedDB", ServerVersion.Parse("10.4.32-mariadb"));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QXq6/wyzC78=",
+  "dgSpecHash": "44NNDJ9RPqs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
+  "projectFilePath": "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\enric\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\enric\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

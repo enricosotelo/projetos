@@ -7373,11 +7373,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
+      "projectUniqueName": "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
       "projectName": "AgendaMed",
-      "projectPath": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
+      "projectPath": "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\AgendaMed.csproj",
       "packagesPath": "C:\\Users\\enric\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\enric\\OneDrive\\Documentos\\GitHub\\projetos\\AgendaMed\\AgendaMed\\obj\\",
+      "outputPath": "C:\\Users\\enric\\OneDrive\\Área de Trabalho\\projetos\\AgendaMed\\AgendaMed\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\enric\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -4,6 +4,7 @@ using AgendaMed.Models;
 using AgendaMed.DataContext;
 using System.Collections.Generic;
 using System.Linq;
+using AgendaMed.Repositories.Interfaces;
 
 namespace AgendaMed.Repositories
 {
@@ -15,10 +16,12 @@ namespace AgendaMed.Repositories
         {
             _context = context;
         }
-
         public async Task<IEnumerable<Agendamento>> GetAsync()
         {
-            return await _context.Agendamentos.ToListAsync();
+            return await _context.Agendamentos
+                .Include(a => a.Paciente)
+                .Include(a => a.Medico) 
+                .ToListAsync();
         }
 
         public async Task<Agendamento> GetAsync(string id)

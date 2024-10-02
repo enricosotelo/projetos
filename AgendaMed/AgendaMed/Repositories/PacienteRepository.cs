@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AgendaMed.Models;
 using AgendaMed.DataContext;
+using AgendaMed.Repositories.Interfaces;
 
 namespace AgendaMed.Repositories
 {

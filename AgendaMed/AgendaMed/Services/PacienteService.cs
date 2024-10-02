@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AgendaMed.DTO;
 using AgendaMed.Models;
-using AgendaMed.Repositories;
+using AgendaMed.Repositories.Interfaces;
 
 namespace AgendaMed.Services
 {

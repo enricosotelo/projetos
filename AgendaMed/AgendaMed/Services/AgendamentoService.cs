@@ -4,19 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using AgendaMed.DTO;
 using AgendaMed.Models;
-using AgendaMed.Repositories;
+using AgendaMed.Repositories.Interfaces;
+using AgendaMed.Services.Interfaces;
 
 namespace AgendaMed.Services
 {
-    public class AgendamentoService : IAgendamentoService // Make sure AgendamentoService implements IAgendamentoService
+    public class AgendamentoService : IAgendamentoService 
     {
         private readonly IAgendamentoRepository _agendamentoRepository;
-        private readonly IPacienteService _pacienteService; // Use the interface instead of the concrete implementation
+        private readonly IPacienteService _pacienteService; 
         private readonly IMedicoService _medicoService;
 
         public AgendamentoService(
             IAgendamentoRepository agendamentoRepository,
-            IPacienteService pacienteService, // Use interface here
+            IPacienteService pacienteService,
             IMedicoService medicoService)
         {
             _agendamentoRepository = agendamentoRepository;
@@ -68,29 +69,6 @@ namespace AgendaMed.Services
             return await _agendamentoRepository.CreateAsync(agendamento);
         }
 
-        public async Task<Agendamento> CreateAgendamentoWithRandomMedicoAsync(string especialidade, string idPaciente, DateTime data)
-        {
-            var paciente = await _pacienteService.GetPacienteByIdAsync(idPaciente);
-            if (paciente == null || !paciente.Ativo)
-            {
-                throw new Exception("Paciente não encontrado ou não ativo");
-            }
-
-            var medicos = await _medicoService.GetMedicosByEspecialidadeAsync(especialidade);
-            if (!medicos.Any())
-            {
-                throw new Exception("Nenhum médico encontrado com a especialidade especificada");
-            }
-
-            var randomMedico = medicos.ElementAt(new Random().Next(medicos.Count()));
-            if (!await _medicoService.VerifyMedicoAvailabilityAsync(randomMedico.Id, data))
-            {
-                throw new Exception("Médico não disponível na data especificada");
-            }
-
-            var agendamento = new Agendamento(idPaciente, randomMedico.Id, data);
-            return await _agendamentoRepository.CreateAsync(agendamento);
-        }
 
 
 
@@ -113,5 +91,47 @@ namespace AgendaMed.Services
         {
             await _agendamentoRepository.DeleteAsync(id);
         }
+
+        public async Task<Agendamento> AgendarMedicoAleatoriamente(string especialidade, AgendamentoEspecialidadeDTO request)
+        {
+            var paciente = await _pacienteService.GetPacienteByIdAsync(request.PacienteId);
+            if (paciente == null || !paciente.Ativo)
+            {
+                throw new Exception("Paciente não encontrado ou inativo");
+            }
+            List<Medico> medicosDisponiveis = (List<Medico>)await _medicoService.GetMedicosByEspecialidadeAsync(especialidade);
+
+            if (medicosDisponiveis.Count == 0)
+            {
+                throw new Exception($"Nenhum médico disponível com a especialidade {especialidade}");
+            }
+
+            List<Medico> medicosDisponiveisNaData = medicosDisponiveis
+                .Where(medico => _medicoService.VerifyMedicoAvailabilityAsync(medico.Id, request.Date).Result)
+                .ToList();
+
+            if (medicosDisponiveisNaData.Count == 0)
+            {
+                throw new Exception($"Nenhum médico disponível com a especialidade {especialidade} para a data {request.Date.ToShortDateString()}");
+            }
+
+            var random = new Random();
+            var medicoSelecionado = medicosDisponiveisNaData.ElementAt(random.Next(medicosDisponiveisNaData.Count));
+
+            Agendamento agendamento = new Agendamento
+            {
+                PacienteId = request.PacienteId,
+                MedicoId = medicoSelecionado.Id,
+                Date = request.Date
+            };
+
+
+            await _agendamentoRepository.CreateAsync(agendamento);
+
+      
+
+            return agendamento;
+        }
+
     }
 }
